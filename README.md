@@ -11,6 +11,16 @@ npm run dev
 
 브라우저에서 `http://localhost:3000`으로 확인할 수 있습니다.
 
+## 네이버 로그인 설정
+
+네이버 개발자센터에서 애플리케이션을 만든 뒤 아래 환경변수를 설정하면
+`/api/auth/naver` 경로로 네이버 OAuth 로그인이 시작됩니다.
+
+```bash
+NAVER_CLIENT_ID=your_naver_client_id
+NAVER_REDIRECT_URI=http://localhost:3000/api/auth/naver/callback
+```
+
 ## 구성
 
 - `app/page.tsx`: 메인 페이지
