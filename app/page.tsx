@@ -3,75 +3,98 @@
 import { useState } from "react";
 
 const navItems = [
-  { label: "샘플", href: "#samples" },
-  { label: "제작상품", href: "#products" },
-  { label: "기능", href: "#features" },
-  { label: "제작방법", href: "#process" },
+  "모바일청첩장",
+  "식전영상",
+  "감사영상",
+  "축가영상",
+  "프로포즈",
+  "제작내역",
+  "이벤트",
 ];
 
-const sampleCards = [
+const benefits = [
   {
-    title: "Dear Spring",
-    names: "민준 & 서아",
-    date: "2026.10.24 SAT",
-    mood: "화사한 가든 웨딩",
-    image: "/assets/sample-couple-garden.png",
+    icon: "play",
+    title: "선제작 후결제",
+    description: "시안을 무료로 제작해보고 마음에 들면 구매해주세요",
   },
   {
-    title: "Soft Moment",
-    names: "도윤 & 하린",
-    date: "2026.11.07 SAT",
-    mood: "차분한 스튜디오",
+    icon: "time",
+    title: "연중무휴 빠른제작",
+    description: "휴일에도 심야에도 평균 30분 이내에 제작이 가능합니다",
+  },
+  {
+    icon: "heart",
+    title: "마음에 들 때까지",
+    description: "구매확정 이후에도 사용기간 내에는 수정이 가능합니다",
+  },
+];
+
+const invitationItems = [
+  {
+    title: "모먼트",
+    badge: "NEW",
+    price: "9,900원",
+    originalPrice: "14,000원",
+    image: "/assets/sample-couple-garden.png",
+    names: "최도현  |  이하나",
+    date: "2026년 10월 24일 토요일 오후 12시 30분",
+    venue: "아펠가모 광화문 B2 로스타뇨홀",
+    tone: "bright",
+  },
+  {
+    title: "미니멀",
+    badge: "NEW",
+    price: "9,900원",
+    originalPrice: "14,000원",
+    image: "/assets/sample-couple-studio.png",
+    names: "김서준  |  이서아",
+    date: "2026.11.07 SAT. 1:30 PM",
+    venue: "아펠가모 잠실 2층 라온홀",
+    tone: "frame",
+  },
+];
+
+const videoItems = [
+  {
+    title: "선물",
+    price: "14,000원",
+    originalPrice: "20,000원",
+    photos: "33장",
+    duration: "2분 56초",
+    music: "선물 - 멜로망스",
+    changeable: true,
+    image: "/assets/hero-invitation-workspace.png",
+  },
+  {
+    title: "평생너만",
+    price: "18,000원",
+    originalPrice: "20,000원",
+    photos: "30장",
+    duration: "2분 30초",
+    music: "평생너만 - 홍종현, 진세연",
+    changeable: false,
+    image: "/assets/sample-couple-evening.png",
+  },
+  {
+    title: "심플 슬라이드",
+    price: "14,000원",
+    originalPrice: "20,000원",
+    photos: "23장",
+    duration: "2분 20초",
+    music: "아로하 - 조정석",
+    changeable: true,
     image: "/assets/sample-couple-studio.png",
   },
   {
-    title: "Night Promise",
-    names: "지후 & 연서",
-    date: "2026.12.12 SAT",
-    mood: "시티 나이트 무드",
-    image: "/assets/sample-couple-evening.png",
-  },
-];
-
-const products = [
-  {
-    label: "Mobile Invitation",
-    title: "모바일 청첩장",
-    description: "사진, 예식 정보, 갤러리, 지도, 계좌 안내를 하나의 링크로.",
-  },
-  {
-    label: "Wedding Clip",
-    title: "식전 영상",
-    description: "두 사람의 사진을 감성적인 영상 흐름으로 구성합니다.",
-  },
-  {
-    label: "Thanks Card",
-    title: "감사장",
-    description: "예식 후 고마운 마음을 모바일 카드로 전할 수 있습니다.",
-  },
-];
-
-const features = [
-  "무료 시안 제작",
-  "모바일 최적화",
-  "갤러리 구성",
-  "지도 안내",
-  "마음 전하기",
-  "카카오 공유",
-];
-
-const processSteps = [
-  {
-    title: "샘플 선택",
-    description: "마음에 드는 디자인을 먼저 고릅니다.",
-  },
-  {
-    title: "정보 입력",
-    description: "예식 일시, 장소, 사진과 인사말을 넣습니다.",
-  },
-  {
-    title: "무료 확인",
-    description: "완성된 모바일 화면을 보고 공개 여부를 결정합니다.",
+    title: "우주메리미",
+    price: "14,000원",
+    originalPrice: "20,000원",
+    photos: "36장",
+    duration: "2분 39초",
+    music: "우주를 건너 - 백예린",
+    changeable: true,
+    image: "/assets/sample-couple-garden.png",
   },
 ];
 
@@ -80,211 +103,172 @@ export default function Home() {
 
   return (
     <>
-      <header className="site-header" aria-label="상단 메뉴">
-        <a className="brand" href="#" aria-label="Wedding Card App 홈">
-          <span className="brand-mark">W</span>
-          <span>Wedding Card</span>
-        </a>
-        <nav className="desktop-nav" aria-label="주요 메뉴">
-          {navItems.map((item) => (
-            <a href={item.href} key={item.href}>
-              {item.label}
+      <header className="site-header">
+        <div className="header-inner">
+          <div className="header-top">
+            <a className="brand" href="#">
+              FROM WEDDING
             </a>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <button className="ghost-button" type="button">
-            로그인
-          </button>
-          <button className="primary-button small" type="button">
-            무료 제작
-          </button>
-        </div>
-        <button
-          className="menu-button"
-          type="button"
-          aria-label={isNavOpen ? "메뉴 닫기" : "메뉴 열기"}
-          aria-expanded={isNavOpen}
-          onClick={() => setIsNavOpen((open) => !open)}
-        >
-          <span />
-          <span />
-        </button>
-        <nav className={`mobile-nav ${isNavOpen ? "is-open" : ""}`}>
-          {navItems.map((item) => (
-            <a
-              href={item.href}
-              key={item.href}
-              onClick={() => setIsNavOpen(false)}
+            <div className="account-menu">
+              <span>gurimong99</span>
+              <button type="button">로그아웃</button>
+            </div>
+            <button
+              className="menu-button"
+              type="button"
+              aria-label={isNavOpen ? "메뉴 닫기" : "메뉴 열기"}
+              aria-expanded={isNavOpen}
+              onClick={() => setIsNavOpen((open) => !open)}
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+              <span />
+              <span />
+            </button>
+          </div>
+          <nav className={`main-nav ${isNavOpen ? "is-open" : ""}`}>
+            {navItems.map((item) => (
+              <a href="#" key={item} onClick={() => setIsNavOpen(false)}>
+                {item}
+              </a>
+            ))}
+          </nav>
+        </div>
       </header>
 
       <main>
-        <section className="hero">
-          <div className="hero-copy">
-            <p className="eyebrow">무료로 만들어보고 결정하는 모바일 청첩장</p>
-            <h1>예쁜 샘플을 고르면 청첩장이 바로 시작됩니다</h1>
-            <p className="hero-description">
-              커플 사진과 예식 정보만 준비하세요. 모바일 청첩장, 식전 영상,
-              감사장까지 결혼 초대에 필요한 화면을 한곳에서 제작합니다.
-            </p>
-            <div className="hero-actions">
-              <a className="primary-button" href="#samples">
-                샘플로 시작하기
-              </a>
-              <a className="text-button" href="#products">
-                제작상품 보기
-              </a>
-            </div>
-            <dl className="hero-stats" aria-label="서비스 지표">
-              <div>
-                <dt>0원</dt>
-                <dd>시안 먼저 제작</dd>
-              </div>
-              <div>
-                <dt>3분</dt>
-                <dd>첫 미리보기 완성</dd>
-              </div>
-              <div>
-                <dt>ALL</dt>
-                <dd>청첩장부터 감사장까지</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className="hero-sample-stack" aria-label="청첩장 샘플 미리보기">
-            {sampleCards.map((sample, index) => (
-              <article className={`hero-phone phone-${index + 1}`} key={sample.title}>
-                <div className="phone-speaker" />
-                <div className="hero-phone-screen">
-                  <img src={sample.image} alt={`${sample.names} 샘플 사진`} />
-                  <div className="sample-overlay">
-                    <span>{sample.title}</span>
-                    <strong>{sample.names}</strong>
-                    <em>{sample.date}</em>
-                  </div>
-                </div>
-              </article>
-            ))}
-            <div className="floating-note">
-              <strong>무료 시안</strong>
-              <span>만들어보고 결정하세요</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="quick-start" aria-label="빠른 시작">
-          <strong>청첩장 샘플 선택</strong>
-          <span>사진과 문구 입력</span>
-          <span>모바일 미리보기</span>
-          <span>링크 공유</span>
-        </section>
-
-        <section className="section products" id="products">
-          <div className="section-heading center">
-            <p className="eyebrow">Wedding Products</p>
-            <h2>결혼 준비에 필요한 모바일 제작 상품</h2>
-            <p>
-              초대 전부터 예식 후 감사 인사까지 이어지는 구성을 한 서비스
-              안에서 고를 수 있게 준비했습니다.
-            </p>
-          </div>
-          <div className="product-grid">
-            {products.map((product) => (
-              <article className="product-card" key={product.title}>
-                <span>{product.label}</span>
-                <h3>{product.title}</h3>
-                <p>{product.description}</p>
-                <button type="button">샘플 보기</button>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section samples" id="samples">
-          <div className="section-heading">
-            <p className="eyebrow">Invitation Samples</p>
-            <h2>커플 사진이 돋보이는 샘플 디자인</h2>
-            <p>
-              실제 모바일 화면처럼 보이도록 커버 사진, 이름, 날짜, 무드가
-              함께 들어간 샘플입니다.
-            </p>
-          </div>
-          <div className="sample-grid">
-            {sampleCards.map((sample) => (
-              <article className="sample-card" key={sample.title}>
-                <div className="sample-phone">
-                  <img src={sample.image} alt={`${sample.mood} 샘플`} />
-                  <div className="sample-overlay">
-                    <span>{sample.title}</span>
-                    <strong>{sample.names}</strong>
-                    <em>{sample.date}</em>
-                  </div>
-                </div>
+        <section className="benefit-band" aria-label="제작 혜택">
+          <div className="page-container benefit-grid">
+            {benefits.map((benefit) => (
+              <article className="benefit-item" key={benefit.title}>
+                <span className={`benefit-icon ${benefit.icon}`} />
                 <div>
-                  <h3>{sample.mood}</h3>
-                  <p>{sample.names} · {sample.date}</p>
+                  <h2>{benefit.title}</h2>
+                  <p>{benefit.description}</p>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="section features" id="features">
-          <div className="section-heading center compact">
-            <p className="eyebrow">Included Features</p>
-            <h2>모바일 청첩장 기본 기능</h2>
+        <section className="catalog-section page-container">
+          <div className="section-title">
+            <h1>신규 모바일청첩장</h1>
+            <p>계좌번호, 카톡송금, 휴대방명록, BGM, RSVP, 내비게이션 제공</p>
           </div>
-          <div className="feature-chip-grid">
-            {features.map((feature) => (
-              <span key={feature}>{feature}</span>
+          <div className="product-grid invitation-grid">
+            {invitationItems.map((item) => (
+              <article className="product-card invitation-card" key={item.title}>
+                <div className={`invitation-preview ${item.tone}`}>
+                  <div className="paper-card">
+                    <div className="invitation-date">26 | 10 | 24</div>
+                    <span>SATURDAY</span>
+                    <img src={item.image} alt={`${item.title} 청첩장 샘플`} />
+                    <strong>{item.names}</strong>
+                    <p>{item.date}</p>
+                    <p>{item.venue}</p>
+                  </div>
+                </div>
+                <ProductMeta
+                  title={item.title}
+                  badge={item.badge}
+                  price={item.price}
+                  originalPrice={item.originalPrice}
+                />
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="section process" id="process">
-          <div className="process-copy">
-            <p className="eyebrow">Free Preview Flow</p>
-            <h2>먼저 만들고, 마음에 들 때 공개하세요</h2>
-            <p>
-              제작 단계는 짧게, 확인은 모바일 화면 그대로. 공개 전까지는
-              부담 없이 샘플을 바꿔볼 수 있는 흐름을 목표로 했습니다.
-            </p>
+        <section className="catalog-section page-container">
+          <div className="section-title">
+            <h1>지금 인기있는 식전영상</h1>
+            <p>두 분의 소중한 추억을 담은 영상으로 더욱 특별하게</p>
           </div>
-          <ol className="process-list">
-            {processSteps.map((step, index) => (
-              <li key={step.title}>
-                <span>{index + 1}</span>
-                <strong>{step.title}</strong>
-                <p>{step.description}</p>
-              </li>
+          <div className="product-grid video-grid">
+            {videoItems.map((item) => (
+              <article className="product-card video-card" key={item.title}>
+                <div className="video-preview">
+                  <img src={item.image} alt={`${item.title} 식전영상 샘플`} />
+                  <div className="video-overlay">
+                    <span>WEDDING MOVIE</span>
+                    <strong>{item.title}</strong>
+                  </div>
+                </div>
+                <ProductMeta
+                  title={item.title}
+                  price={item.price}
+                  originalPrice={item.originalPrice}
+                />
+                <dl className="video-spec">
+                  <div>
+                    <dt>사진 장수</dt>
+                    <dd>{item.photos}</dd>
+                  </div>
+                  <div>
+                    <dt>재생 시간</dt>
+                    <dd>{item.duration}</dd>
+                  </div>
+                  <div>
+                    <dt>배경 음악</dt>
+                    <dd>
+                      {item.music}
+                      {item.changeable && <em>변경가능</em>}
+                    </dd>
+                  </div>
+                </dl>
+              </article>
             ))}
-          </ol>
-        </section>
-
-        <section className="pricing" id="pricing">
-          <div>
-            <p className="eyebrow">Start Free</p>
-            <h2>지금 샘플로 무료 제작을 시작하세요</h2>
-            <p>
-              마음에 드는 디자인을 고르고, 두 사람의 사진과 예식 정보를 넣어
-              모바일 초대 화면을 확인해보세요.
-            </p>
           </div>
-          <button className="primary-button light" type="button">
-            무료 시안 만들기
-          </button>
         </section>
       </main>
 
       <footer className="site-footer">
-        <span>Wedding Card App</span>
-        <span>모바일 청첩장 · 식전영상 · 감사장</span>
+        <div className="page-container footer-inner">
+          <nav>
+            <a href="#">프롬웨딩</a>
+            <a href="#">이용약관</a>
+            <a href="#">개인정보처리방침</a>
+            <a href="#">제휴문의</a>
+          </nav>
+          <p>상호명 : 웨딩카드앱 | 서울시 용산구 한강대로 104 가동 305호</p>
+          <p>대표자 : 김청첩 | 이메일 : support@wedding-card.app</p>
+          <p>사업자등록번호 : 809-05-02792</p>
+        </div>
       </footer>
     </>
+  );
+}
+
+function ProductMeta({
+  title,
+  badge,
+  price,
+  originalPrice,
+}: {
+  title: string;
+  badge?: string;
+  price: string;
+  originalPrice: string;
+}) {
+  return (
+    <div className="product-meta">
+      <div>
+        <h3>
+          {title}
+          {badge && <span>{badge}</span>}
+        </h3>
+        <p>
+          <strong>{price}</strong>
+          <del>{originalPrice}</del>
+        </p>
+      </div>
+      <div className="product-actions">
+        <button className="sample-button" type="button">
+          샘플보기
+        </button>
+        <button className="make-button" type="button">
+          제작하기
+        </button>
+      </div>
+    </div>
   );
 }
